@@ -32,13 +32,30 @@ public class Spielfeld{
             System.out.println("---------------------------------------------");
         }
     }
-    public Feld FeldSpawn(int Art){
+    public Feld FeldSpawn(int Art, Feld Vorgaenger){
         // 1 = normal
         // 2 = Steh
         // 3 = Heim
-        // 4 = 
+        // 4 = Stand
+        // 5 = Ablenk
+
         if(i=1){
-            
+            return new normal(Vorgaenger);
+        }
+        if(i=2){
+            return new steh(Vorgaenger);
+        }
+        if(i=3){
+            return new heim(Vorgaenger);
+        }
+        if(i=4){
+            return new stand(Vorgaenger);
+        }
+        if(i=5){
+            return new ablenk(Vorgaenger);
+        }
+        else{
+            return null;
         }
     }
     public void SpielfeldInitialisieren(){
