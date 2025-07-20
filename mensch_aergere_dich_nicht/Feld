@@ -1,0 +1,239 @@
+public class Feld {
+    private Figur figur;
+    private Spieler spieler;
+    private Feld nachfolger;
+    
+    
+    
+    private int[] figuren;
+    private int[] positionen; 
+    private int figurZähler;
+    private int positionZähler;
+    
+    private boolean figurDa;
+    private int feldNr;
+    
+    public Feld(){
+        figur = new Figur();
+        spieler = new Spieler();
+        figurZähler = 0;
+        positionZähler = 0;
+        
+        figuren = new int[4];
+        positionen = new int[4];
+         
+        
+        
+        
+    }
+    
+    public Feld(int nfeldNr){
+        feldNr = nfeldNr;
+        if(feldNr < 0 && feldNr>-20){
+            figurDa = true;
+        }
+        else{
+           figurDa = false;  
+        }
+    }
+
+ 
+   
+    public int feldNrSuchen( int zahl){      
+       while(feldNr != zahl){
+           return nachfolger.feldNrSuchen(zahl);
+       }
+       return feldNr;
+    }
+    
+     /*  for(int i = 0; i < 4; i++){
+          figuren[i] = figurSuchen(anzahl, s);
+          positionen[i] = positionSuchen(anzahl,s); 
+      }
+      */
+     
+    public void figurMöglichkeiten(Spieler s){
+        while(figurZähler <5){    
+           if((figurDa == true) && (figur.getBesitzer() == s)){
+               figuren[figurZähler] = figur.getNummer();
+               figurZähler++;
+           }
+
+           else{
+                nachfolger.figurMöglichkeiten(s);
+           }
+        }
+    }
+   
+    public void positionMöglichkeiten( Spieler s){
+        while(positionZähler <5){    
+           if((figurDa == true) && (figur.getBesitzer() == s)){
+               positionen[positionZähler] = feldNr;
+               positionZähler++;
+           }
+
+           else{
+                nachfolger.positionMöglichkeiten(s);
+           }
+        }
+    }
+   
+   
+   
+   public void ziehen(int gewürfelt){
+       figurZähler = 0;
+       figurMöglichkeiten(spieler);
+   }
+   
+    public void feldAusgeben(){
+        System.out.println();
+    }
+    
+    //vergleich besitzer der figur und spieler
+    /*public void hatAbstand(Spieler s, int gewürfelt, boolean besitzer){
+        int k = feldNr;
+        //feldNrSuchen(ursprung);
+        if(nachfolger.feldNr == (gewürfelt + feldNr)){
+            if(figurDa == true){
+                if(figur.getBesitzer() == spieler){
+                   System.out.println("eigene Figur"); 
+            }
+            else{
+                System.out.println("Figur " + figur.getNummer() + " kann von Feld " + k );
+            }
+        }
+        else{
+            
+        }
+    }
+        }
+
+        */
+       
+       
+    public int feldNrGeben(int ursprungsfeld, int gewürfelt, int laufen){
+        if(feldNr == ursprungsfeld){
+            while(laufen < gewürfelt){
+                laufen++; 
+                return nachfolger.feldNrGeben(ursprungsfeld, gewürfelt, laufen);
+            }
+        }
+        else{
+             return nachfolger.feldNrGeben(ursprungsfeld, gewürfelt, laufen);  
+        } 
+    }
+    
+    public void möglichkeiten(Spieler s){
+      figurMöglichkeiten(s);
+      positionMöglichkeiten(s);
+    }
+    
+        public boolean figurDa(){
+        return figurDa;
+    }
+      
+    //figur/spieler ruft methode auf und setzt wert auf true
+    public boolean figurDaSetzen(boolean wert){
+        return wert;
+    }
+    
+    
+    
+
+    
+    //start
+    
+    public boolean darfBetreten(int feld){
+        if(feldNr == feld){
+            if((figurDa == true) && (figur.getBesitzer() == spieler)){
+               return false; 
+        
+            }
+            else{
+                return true;
+            }
+        }
+        else{
+            return nachfolger.darfBetreten(feld);
+        }  
+    }
+
+//steh
+//figur 1-4 ist bei heim 1-4; => start feld von 1-4 ist also 1 und so weiter
+    // 5-8 => 2
+    // 9-12 => 3
+    //13-16 => 4
+    /*public void startNr(int gewürfelt){
+        int figurNr = figur.getNummer(); 
+        int startNr = -1; 
+        if(figurNr < 9){//1-8
+            if(figurNr <5){//1-4
+                startNr = 1;
+            }
+            else{
+                startNr = 2; //5-8
+            }
+        }
+        else if(figurNr < 13){//9-12 
+            startNr = 3;
+        }
+        else{
+            startNr = 4; //13-16
+        }
+        
+    
+        
+    }
+    */
+
+     public int startNrGeben(){
+        int figurNr = figur.getNummer(); 
+        if(figurNr < 9){//1-8
+            if(figurNr <5){//1-4
+                return 1;
+            }
+            else{
+                return 2; //5-8
+            }
+        }
+        else if(figurNr < 13){//9-12 
+            return 3;
+        }
+        else{
+            return 4; //13-16
+        }
+  
+    }
+
+    public void rausgehen(int startNr, int gewürfelt){
+        startNr = startNrGeben();
+         if((gewürfelt == 6) && (darfBetreten(startNr) == true)){
+           figurDa = false; 
+           figurSetzen(startNr);
+        }
+    }
+
+    
+    
+    
+    public void figurSetzen(int nummer){
+        if(feldNr == nummer){
+            figurDa = true; 
+        }
+        else{
+            nachfolger.figurSetzen(nummer);
+        }
+    }
+    
+    public void figurEntfernen(int nummer){
+        if(feldNr == nummer){
+            figurDa = false; 
+        }
+        else{
+            nachfolger.figurEntfernen(nummer);
+        }
+    }
+    
+    
+    
+    }
