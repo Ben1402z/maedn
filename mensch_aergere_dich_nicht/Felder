@@ -1,0 +1,112 @@
+public class Felder{
+    
+    private Feld f;
+    public Felder(){
+        
+    }
+    
+    public void felderNummer(){
+        //steh Felder -1 -(-16)
+        //steh 1-4
+        Feld steh1 = new Feld(-1); //figur 1
+        Feld steh2 = new Feld(-2); //figur 2
+        Feld steh3 = new Feld(-3); //figur 3
+        Feld steh4 = new Feld(-4); //figur 4
+        
+        //steh 5-8
+        Feld steh5 = new Feld(-5); //figur 5
+        Feld steh6 = new Feld(-6); //figur 6
+        Feld steh7 = new Feld(-7); //figur 7
+        Feld steh8 = new Feld(-8); //figur 8
+        
+        //steh 9-12
+        Feld steh9 = new Feld(-9); //figur 9
+        Feld steh10 = new Feld(-10); //figu 10
+        Feld steh11 = new Feld(-11); //figur 11
+        Feld steh12 = new Feld(-12); //figur 12
+        
+        //steh 13-16
+        Feld steh13 = new Feld(-13); //figur 13
+        Feld steh14 = new Feld(-14); //figur 14
+        Feld steh15 = new Feld(-15); //figur 15
+        Feld steh16 = new Feld(-16); //figur 16
+        
+        
+        
+        //start Felder 1-4
+        Feld start1 = new Feld(1); //figur 1-4
+        Feld start2 = new Feld(2); //figur 5-8
+        Feld start3 = new Feld(3); //figur 9-12
+        Feld start4 = new Feld(4); //figur 13-16
+        
+        //ablenk Felder 11-14
+        Feld ablenk1 = new Feld(11); //figur 1-4
+        Feld ablenk2 = new Feld(12); //figur 5-8
+        Feld ablenk3 = new Feld(13); //figur 9-12
+        Feld ablenk4 = new Feld(14); //figur 13-16
+        
+        //heim Felder -101-(-116)
+        //heim 1-4
+        Feld heim1 = new Feld(-101); 
+        Feld heim2 = new Feld(-102); 
+        Feld heim3 = new Feld(-103); 
+        Feld heim4 = new Feld(-104); 
+        
+        //heim 5-8
+        Feld heim5 = new Feld(-105); 
+        Feld heim6 = new Feld(-106); 
+        Feld heim7 = new Feld(-107); 
+        Feld heim8 = new Feld(-108); 
+        
+        //heim 9-12
+        Feld heim9 = new Feld(-109); 
+        Feld heim10 = new Feld(-110); 
+        Feld heim11 = new Feld(-111); 
+        Feld heim12 = new Feld(-112); 
+        
+        //heim 13-16
+        Feld heim13 = new Feld(-113); 
+        Feld heim14 = new Feld(-114); 
+        Feld heim15 = new Feld(-115); 
+        Feld heim16 = new Feld(-116); 
+        
+        
+        //normal Felder 101 -132
+        Feld normal1 = new Feld(101);
+        Feld normal2 = new Feld(102);
+        Feld normal3 = new Feld(103);
+        Feld normal4 = new Feld(104);
+        Feld normal5 = new Feld(105);
+        Feld normal6 = new Feld(106);
+        Feld normal7 = new Feld(107);
+        Feld normal8 = new Feld(108);
+        Feld normal9 = new Feld(109);
+        Feld normal10 = new Feld(110);
+        Feld normal11 = new Feld(111);
+        Feld normal12 = new Feld(112);
+        Feld normal13 = new Feld(113);
+        Feld normal14 = new Feld(114);
+        Feld normal15 = new Feld(115);
+        Feld normal16 = new Feld(116);
+        Feld normal17 = new Feld(117);
+        Feld normal18 = new Feld(118);
+        Feld normal19 = new Feld(119);
+        Feld normal20 = new Feld(120);
+        Feld normal21 = new Feld(121);
+        Feld normal22 = new Feld(122);
+        Feld normal23 = new Feld(123);
+        Feld normal24 = new Feld(124);
+        Feld normal25 = new Feld(125);
+        Feld normal26 = new Feld(126);
+        Feld normal27 = new Feld(127);
+        Feld normal28 = new Feld(128);
+        Feld normal29 = new Feld(129);
+        Feld normal30 = new Feld(130);
+        Feld normal31 = new Feld(131);
+        Feld normal32 = new Feld(132);
+        
+        
+        
+    }
+    
+}
