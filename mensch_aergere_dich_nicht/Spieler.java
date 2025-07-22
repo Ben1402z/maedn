@@ -1,41 +1,57 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.util.*;
 
 public class Spieler{
-    private String name;
+    private String farbe;
     private ArrayList<Figur> figuren;
     
-    private static List<String> verfuegbareFarben = new ArrayList<>(Arrays.asList("rot", "blau", "gelb", "gruen"));
-    
-    public Spieler(){
-        this.figuren = new ArrayList<>();
-    }
-    
-    /**
-     *@param farbe gewünschte Farbe (klein geschrieben, z.B. "rot")
-     * @return true wenn erfolgreich, false wenn Farbe bereits vergeben 
-     */    
-    public boolean waehleFarbe(String farbe){
-        if(verfuegbareFarben.contains(farbe)){
-            this.name = farbe;
-            verfuegbareFarben.remove(farbe);
-            for(int i = 1;i<=4;i++){
-                figuren.add(new Figur(this,i));
+    public static String waehleFarbe(ArrayList<String> farben, Set<String> bereitsVergeben) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Verfügbare Farben:");
+            for (int i = 0; i < farben.size(); i++) {
+                String status = bereitsVergeben.contains(farben.get(i)) ? " (bereits vergeben)" : "";
+                System.out.println((i + 1) + " = " + farben.get(i) + status);
             }
-            return true;
-        }
-        else{
-            return false;
+            System.out.print("Wähle eine Farbe (Nummer eingeben): ");
+            if (scanner.hasNextInt()) {
+                int wahl = scanner.nextInt();
+                if (wahl >= 1 && wahl <= farben.size() && !bereitsVergeben.contains(farben.get(wahl - 1))) {
+                    return farben.get(wahl - 1);
+                }
+            } else {
+                scanner.next(); // ungültige Eingabe verwerfen
+            }
+            System.out.println("Ungültige Eingabe oder Farbe schon vergeben. Bitte nochmal versuchen.");
         }
     }
     
-    public String getName(){
-        return name;  
+    public static int wuerfeln() {
+        Random rand = new Random();
+        return rand.nextInt(6) + 1; // gibt eine Zahl von 1 bis 6 zurück
     }
     
-    public ArrayList<Figur>getFiguren(){
-        return figuren;
+    public Spieler(String gewaehlteFarbe){
+        
+        this.farbe = gewaehlteFarbe;
+        
+        this.figuren = new ArrayList<>();
+        for(int i = 1 ; i<=4 ; i++){
+            figuren.add(new Figur(this,i));
+        }        
+        
+    }
+    
+    
+    public String getFarbe(){
+        return this.farbe;  
+    }
+    
+    public Figur getFigur(int nr){
+        return figuren.get(nr);
     }
     
     public void zieheFigur(int figurNummer,int felder){
@@ -45,7 +61,4 @@ public class Spieler{
         }
     }
     
-    public static List<String>getVerfuegbareFarben(){
-        return verfuegbareFarben;
-    }
 }
