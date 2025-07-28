@@ -39,26 +39,88 @@ public class Spieler{
         this.farbe = gewaehlteFarbe;
         
         this.figuren = new ArrayList<>();
-        for(int i = 1 ; i<=4 ; i++){
-            figuren.add(new Figur(this,i));
-        }        
+        
+        int nr = 0;
+        
+        if (this.farbe == "Blau") {
+            nr = 1;
+        } else if (this.farbe == "Rot") {
+            nr = 5;
+        } else if (this.farbe == "Gelb") {
+            nr = 9;
+        } else if (this.farbe == "Grün") {
+            nr = 13;
+        }
+        
+        for(int i = 0 ; i<4 ; i++){
+            this.figuren.add(new Figur(this, nr+i, (-nr)-i));
+        }
+        for (int i = 0 ; i < this.figuren.size() ; i++) {
+            System.out.println(this.figuren.get(i));
+            System.out.println(this.figuren.get(i).getNummer());
+        }
         
     }
+
+    public Figur waehleFigur(int[] möglichkeiten){
+        
+        System.out.println("Bewegbare Figuren: ");
+        System.out.println(Arrays.toString(möglichkeiten));
+        
+        Scanner scanner = new Scanner(System.in);
+        int wahl;
+        while (true) {
+            System.out.print("Welche Figur möchtest du bewegen? Gib die Nummer ein: ");
+            if (scanner.hasNextInt()) {
+                wahl = scanner.nextInt();
+                boolean enthalten = false;
+                for (int m : möglichkeiten) {
+                    if (m == wahl) {
+                        enthalten = true;
+                        break;
+                    }
+                }
+                if (enthalten) {
+                    break;
+                } else {
+                    System.out.println("Ungültige Wahl! Diese Figur kann nicht bewegt werden.");
+                }
+            } else {
+                scanner.next(); // ungültige Eingabe verwerfen
+                System.out.println("Bitte eine gültige Zahl eingeben.");
+            }
+        }
+        
+        for (int i = 0 ; i < this.figuren.size() ; i++) {
+            if (this.figuren.get(i).getNummer() == wahl) {
+                return this.figuren.get(i);
+            }
+        }
+        
+        return null;
+    }
     
+    public void updateFeld(int feld, int figurNr){
+        
+        for (int i = 0 ; i < this.figuren.size() ; i++) {
+            if (this.figuren.get(i).getNummer() == figurNr) {
+                System.out.println("Feld davor");
+                System.out.println(this.figuren.get(i).getFeld());
+                this.figuren.get(i).setFeld(feld);
+                System.out.println("Feld danach");
+                System.out.println(this.figuren.get(i).getFeld());
+            }
+        }
+        
+    }
     
     public String getFarbe(){
         return this.farbe;  
     }
     
     public Figur getFigur(int nr){
-        return figuren.get(nr);
+        return this.figuren.get(nr);
     }
     
-    public void zieheFigur(int figurNummer,int felder){
-        Figur figur = getFigur(figurNummer);
-        if(figur != null){
-            figur.ziehe(felder);
-        }
-    }
     
 }
