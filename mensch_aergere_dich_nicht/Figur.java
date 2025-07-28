@@ -1,23 +1,28 @@
 public class Figur{
     private Spieler besitzer;
     private int nummer;
+    private int feld; // position
     
-    public Figur(Spieler besitzer, int nummer){
+    public Figur(Spieler besitzer, int nummer, int feld){
         this.besitzer = besitzer;
         this.nummer = nummer;
+        this.feld = feld;
     }
     
     public Spieler getBesitzer(){
-        return besitzer;
+        return this.besitzer;
     }
     
     public int getNummer(){
-        return nummer;
+        return this.nummer;
     }
     
-    public void ziehe(int felder){
-        
-        }
-        
+    public void setFeld(int feld){
+        this.feld = feld;
     }
+    
+    public int getFeld(){
+        return this.feld;
+    }
+    
 }
