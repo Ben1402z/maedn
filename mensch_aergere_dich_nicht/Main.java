@@ -1,18 +1,29 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.*;
+
 public class Main{
     public static void main (String[] args){
-        Spieler spieler1 = new Spieler();
-        if(spieler1.waehleFarbe("rot")){
-            System.out.println("Spieler 1 hat die Farbe gewählt: "+ spieler1.getName());
+        
+        ArrayList<String> farben = new ArrayList<>(Arrays.asList("Blau", "Rot", "Gelb", "Grün"));
+        Set<String> bereitsVergeben = new HashSet<>();
+        int anzahlSpieler = 2;
+        
+        Spieler[] spieler = new Spieler[anzahlSpieler];
+        
+        for (int i = 0; i < anzahlSpieler; i++) {
+            System.out.println("Spieler " + (i + 1) + ":");
+            String gewaehlteFarbe = Spieler.waehleFarbe(farben, bereitsVergeben);
+            bereitsVergeben.add(gewaehlteFarbe);
+            spieler[i] = new Spieler(gewaehlteFarbe);
         }
         
-        Spieler spieler2 = new Spieler();
-        if(!spieler2.waehleFarbe("rot")){
-            System.out.println("Farbe 'rot' ist bereits vergeben!");
-        }
+        System.out.println(Spieler.wuerfeln());
         
-        if( spieler2.waehleFrbe("blau")){
-            system.out.println("Spieler2 hat die Farbe gewählt:"+ spieler2.getName());
-        }
-        System.out.println("Noch verfügbare 
+        int[] zahlen = {1,2,4};
+        Figur x = spieler[0].waehleFigur(zahlen);
+        System.out.println(x.getNummer());
+        
+        spieler[0].updateFeld(45, 1);
     }
 }
